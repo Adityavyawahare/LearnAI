@@ -1,0 +1,22 @@
+.navbar-left {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: #f8f9fa; /* Optional: Customize background color */
+    border-right: 1px solid #e0e0e0;
+    width: 10%; /* Adjust the width of the navbar */
+  }
+  
+  .navbar-left .navbar-toggler {
+    margin-bottom: 1rem;
+  }
+  
+  .navbar-left .navbar-collapse {
+    flex-grow: 0;
+  }
+  
+  .navbar-left .nav-link {
+    padding: 1rem 1.5rem;
+  }
+  
