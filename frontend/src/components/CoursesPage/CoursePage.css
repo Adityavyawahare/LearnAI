@@ -1,11 +1,7 @@
-/* Assuming you have a fixed navbar on the left */
-.app-container {
-    display: flex;
-  }
-  
 
   .content {
-    flex: 1;
+    display: flex;
+    justify-content: center;
   }
   
   .home {

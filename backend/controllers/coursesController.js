@@ -1,5 +1,5 @@
-import mongoose from 'mongoose'
 import courseModel from '../models/courseModel.js'
+import courseInfoModel from '../models/courseInfoModel.js';
 
 //get all courses
 const getCourses= async (req, res)=>{
@@ -14,24 +14,29 @@ const getCourse= async (req, res)=>{
     if(!course){
         return res.status(404).json({error:"No such course"})
     }
-
     res.status(200).json(course)
 }
 
-//add courses
-const addCourse= async (req,res)=>{
-    const {id, name, professor, term}=req.body
- 
-    try{
-        const course= await courseModel.create({id, name, professor, term})
-        res.status(200).json(course)
+const addCourse = async (req, res) => {
+    const { id, name, professor, term } = req.body;
+
+    try {
+        // Create the course in courseModel
+        const course = await courseModel.create({ id, name, professor, term });
+        const courseInfo = await courseInfoModel.create({
+            course_id: id,  // Link by the same id
+            videos: [],        // Empty array for videos
+            quizprac: [],      // Empty array for quiz practice
+            content: [],       // Empty array for content
+            people: [],        // Empty array for people
+            quiz: []           // Empty array for quiz
+        });
+
+        res.status(200).json({ course, courseInfo });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
-    catch(error)
-    {
-        res.status(500).json({error: error.message})
-    }
-    res.json({msg:'POST a new course'})
-}
+};
 
 //delete course
 const deleteCourse= async (req,res)=>{

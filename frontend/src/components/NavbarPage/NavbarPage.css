@@ -5,7 +5,7 @@
     height: 100%;
     background-color: #f8f9fa; /* Optional: Customize background color */
     border-right: 1px solid #e0e0e0;
-    width: 10%; /* Adjust the width of the navbar */
+    width: 8%; /* Adjust the width of the navbar */
   }
   
   .navbar-left .navbar-toggler {

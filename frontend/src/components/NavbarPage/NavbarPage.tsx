@@ -12,6 +12,9 @@ function NavHamburger() {
             <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto flex-column">
                 <Nav.Item>
+                <Nav.Link eventKey="2" href="/profile">Profile</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
                 <Nav.Link eventKey="1" href="/">Dashboard</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
