@@ -12,4 +12,12 @@ router.get('/courses', getCourses)
 router.post('/courses', addCourse)
 router.delete('/courses/:id', deleteCourse)
 router.put('/courses/:id', updateCourse)
+
+router.get('/courses/:id/home')
+router.get('/courses/:id/videos')
+router.get('/courses/:id/syllabus')
+router.get('/courses/:id/assignments')
+router.get('/courses/:id/people')
+router.get('/courses/:id/AI_Quiz')
+
 export default router

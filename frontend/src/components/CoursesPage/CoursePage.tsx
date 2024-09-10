@@ -30,11 +30,20 @@ const CoursePage= ()=>{
     },[])
     
     if (loading) {
-        return <div>Loading...</div>;  // Show loading indicator while fetching data
+        return (
+            <>
+                <NavHamburger />
+                <div className="content">
+                    <div className="courses">
+                        <p>loading......</p>
+                    </div>
+                </div>
+            </>
+        )
     }
 
     return (
-        <div className="app-container">
+        <>
             <NavHamburger />
             <div className="content">
                 <div className="courses">
@@ -49,7 +58,7 @@ const CoursePage= ()=>{
                         ))}
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 

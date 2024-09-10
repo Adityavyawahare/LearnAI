@@ -4,6 +4,9 @@ import mongoose from 'mongoose';
 import landingPageRoutes from "./routes/landingPageRoutes.js"
 import coursesPageRoutes from "./routes/coursesPageRoutes.js"
 import adminPageRoutes from "./routes/adminPageRoutes.js"
+import profilePageRoutes from './routes/profilePageRoutes.js'
+import courseInfoRoutes from './routes/courseInfoRoutes.js'
+
 import cors from 'cors'
 
 
@@ -24,6 +27,8 @@ app.use((req,res,next)=>{
 app.use('/dashboard',landingPageRoutes)
 app.use('/courses',coursesPageRoutes)
 app.use('/admin',adminPageRoutes)
+app.use('/profile', profilePageRoutes)
+app.use('/admin/courses', courseInfoRoutes)
 
 mongoose.connect(process.env.MONGO_URI)
     .then(()=>{
