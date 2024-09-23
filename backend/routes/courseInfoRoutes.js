@@ -13,7 +13,6 @@ router.put('/:id/videos', updateCourseInfo)
 router.put('/:id/syllabus', updateCourseInfo)
 router.put('/:id/assignments', updateCourseInfo)
 router.put('/:id/people', updateCourseInfo)
-router.put('/:id/AI_Quiz', updateCourseInfo)
-
+router.put('/:id/chatbot', updateCourseInfo)
 
 export default router

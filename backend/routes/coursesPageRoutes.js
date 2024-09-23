@@ -18,6 +18,6 @@ router.get('/:id/assignments', getCourseInfo)
 
 router.get('/:id/people', getCourseInfo)
 
-router.get('/:id/AI_Quiz', getCourseInfo)
+router.get('/:id/chatbot', getCourseInfo)
 
 export default router

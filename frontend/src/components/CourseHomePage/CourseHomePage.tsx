@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import '../CoursesPage/CoursePage.css'
 import { useParams } from "react-router-dom";
-import CourseInfoPage from "../CourseInfoPage/CourseInfoPage";
+import CourseInfoPage from "../CourseInfoNavbar/CourseInfoNavbar";
 import './courseHomepage.css'
 
 const CourseHomePage= ()=>{
