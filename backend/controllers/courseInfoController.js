@@ -26,14 +26,14 @@ export const updateCourseInfo=async (req,res)=>{
 //post course info
 export const InsertCourseInfo=async (req,res)=>{
     const {course_id, home, syllabus, vids, people, assignments, AI_gen_quiz }=req.body
-    
+    const chatbot=[]
     try{
-        const course= await courseInfoModel.create({course_id, home, syllabus, vids, people, assignments, AI_gen_quiz })
-        res.status(200).json(course)
+        const course= await courseInfoModel.create({course_id, home, syllabus, vids, people, assignments, chatbot, AI_gen_quiz })
+        return res.status(200).json(course)
     }
     catch(error)
     {
-        res.status(500).json({error: error.message})
+        return res.status(500).json({error: error.message})
     }
-    res.json({msg:'POST a new course'})
+    // res.json({msg:'POST a new course'})
 }

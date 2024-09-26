@@ -6,6 +6,7 @@ import coursesPageRoutes from "./routes/coursesPageRoutes.js"
 import adminPageRoutes from "./routes/adminPageRoutes.js"
 import profilePageRoutes from './routes/profilePageRoutes.js'
 import courseInfoRoutes from './routes/courseInfoRoutes.js'
+import chatbotPageRoutes from './routes/chatbotPageRoutes.js'
 
 import cors from 'cors'
 
@@ -25,6 +26,7 @@ app.use((req,res,next)=>{
 })
 
 app.use('/dashboard',landingPageRoutes)
+app.use('/courses/:id/chatbot',chatbotPageRoutes)
 app.use('/courses',coursesPageRoutes)
 app.use('/admin',adminPageRoutes)
 app.use('/profile', profilePageRoutes)

@@ -2,6 +2,19 @@ import mongoose from 'mongoose'
 
 const Schema=mongoose.Schema
 
+const chatMessageSchema = new Schema({
+    sender: {
+        type: String,
+        enum: ['user', 'system'],
+        required: true
+    },
+    text: {
+        type: String,
+        required: true
+    }
+    
+}, { _id: false });
+
 const courseInfoSchema = new Schema({
     course_id: {
         type: String,
@@ -69,6 +82,13 @@ const courseInfoSchema = new Schema({
                 required: true
             }
         },
+    ],
+    chatbot: [
+        {
+            id: mongoose.Types.ObjectId,
+            title: String,
+            conversation: [chatMessageSchema] // Or an array of conversation objects, depending on your structure
+        }
     ],
     AI_gen_quiz: [
         {

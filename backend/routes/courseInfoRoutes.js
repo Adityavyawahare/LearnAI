@@ -15,4 +15,5 @@ router.put('/:id/assignments', updateCourseInfo)
 router.put('/:id/people', updateCourseInfo)
 router.put('/:id/chatbot', updateCourseInfo)
 
+
 export default router
