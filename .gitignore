@@ -1,5 +1,6 @@
 model/data/
 model/notebooks/RAG.ipynb
+.vite
 
 # Logs
 logs

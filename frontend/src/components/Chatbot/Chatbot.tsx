@@ -64,7 +64,7 @@ const Chatbot = () => {
     // Handle sending user messages
     const handleSend = async () => {
         if (!userMessage) return;
-    
+        setUserMessage(""); // Clear input
         // Update conversation with the user's message
         setCurrentConversation((prevConversation) => [
             ...prevConversation, 
@@ -78,9 +78,7 @@ const Chatbot = () => {
             ...prevConversation, 
             { sender: "system", text: botResponse }
         ]);
-    
-        setUserMessage(""); // Clear input
-    };
+        };
 
     // Select an existing conversation
     const selectConversation = async (newConversationId: string) => {
@@ -108,6 +106,28 @@ const Chatbot = () => {
             });
         }
     };
+    
+    const deleteConversation= async (TempConverId: string)=>{
+        if(conversationId===TempConverId)
+        {
+            setConversationId('');
+            setCurrentConversation([]);
+            return
+        }
+        setLoading(true)
+        await axios.delete(`http://localhost:4000/courses/${id}/chatbot/${TempConverId}`)
+        .then(async (response) => {
+            const res = await axios.get(`http://localhost:4000/courses/${id}/chatbot/`);
+            console.log(res.data)
+            setChatHistory(res.data);
+            setLoading(false);
+        })
+        .catch((error) => {
+            console.error(error);
+            setLoading(false);
+        });
+    }
+
 
     const handleNewConversation= async ()=>{
         // if conversation exists then update it with put
@@ -225,6 +245,9 @@ const Chatbot = () => {
                                 className="conversation-list"
                             >
                                 {conversation.id}
+                            </Button>
+                            <Button onClick={() => deleteConversation(conversation.id)}>
+                            X
                             </Button>
                         </div>
                     ))}

@@ -84,7 +84,8 @@
   }
 
   .conversation-list{
-    width: 100%;
+    width: 90%;
+    margin: 0px 2px;
     background-color:  #206A83;
     color: #ffffff;
   }
