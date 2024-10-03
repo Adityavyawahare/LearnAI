@@ -1,6 +1,7 @@
 model/data/
 model/notebooks/RAG.ipynb
 .vite
+__pycache__
 
 # Logs
 logs

@@ -9,6 +9,7 @@ import CourseInfoPage from './CourseInfoNavbar/CourseInfoNavbar';
 import CourseHomePage from './CourseHomePage/CourseHomePage';
 import CourseSyllabusPage from './CourseSyllabusPage/CourseSyllabusPage';
 import Chatbot from './Chatbot/Chatbot';
+import CourseVideosPage from './CourseVideosPage/CourseVideosPage';
 
 function Layout() {
   return (
@@ -21,6 +22,7 @@ function Layout() {
             <Route path='/courses/:id' element={<CourseInfoPage/>}/>
             <Route path='/courses/:id/home' element={<CourseHomePage/>}></Route>
             <Route path='/courses/:id/syllabus' element={<CourseSyllabusPage/>}></Route>
+            <Route path='/courses/:id/videos' element={<CourseVideosPage/>}></Route>
             <Route path='/courses/:id/chatbot' element={<Chatbot/>}></Route>
           </Routes>
         </div>
