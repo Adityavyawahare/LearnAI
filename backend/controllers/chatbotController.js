@@ -100,15 +100,22 @@ export const newChatHistory = async (req, res) => {
 export const deleteChatHistory = async (req, res) => {
     const { id, conversationId } = req.params;
 
-    const course = await courseInfoModel.findOneAndUpdate(
-        { course_id: id },
-        { $pull: { 'chatbot': { id: conversationId } } },
-        { new: true }
-    );
+    console.log(id, conversationId);
+    
+    try {
+        const course = await courseInfoModel.findOneAndUpdate(
+            { course_id: id },
+            { $pull: { chatbot: { id: conversationId } } },
+            { new: true }
+        );
 
-    if (!course) {
-        return res.status(400).json({ error: 'No such course or conversation' });
+        if (!course) {
+            return res.status(404).json({ error: 'No such course found' });
+        }
+
+        res.status(200).json({ message: 'Conversation deleted successfully', course });
+    } catch (error) {
+        console.error('Error deleting conversation:', error);
+        res.status(500).json({ error: 'Internal server error' });
     }
-
-    res.status(200).json({ message: 'Conversation deleted successfully', course });
 };

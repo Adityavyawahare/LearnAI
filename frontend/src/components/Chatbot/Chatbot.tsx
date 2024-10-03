@@ -64,23 +64,23 @@ const Chatbot = () => {
     // Handle sending user messages
     const handleSend = async () => {
         if (!userMessage) return;
-    
-        // Update conversation with the user's message
-        setCurrentConversation((prevConversation) => [
-            ...prevConversation, 
-            { sender: "user", text: userMessage }  // No need for type assertion here
-        ]);
-    
-        const botResponse: string = await fetchBotResponse(userMessage);
-    
-        // Update conversation with the bot's response
-        setCurrentConversation((prevConversation) => [
-            ...prevConversation, 
-            { sender: "system", text: botResponse }
-        ]);
-    
-        setUserMessage(""); // Clear input
-    };
+      
+        // Clear the user input after sending the message
+        setUserMessage("");
+      
+        // Update the conversation with the user's message first
+        setCurrentConversation((prev) => [...prev, { sender: "user", text: userMessage }]);
+      };
+      
+      useEffect(() => {
+        const fetchBotResponseAsync = async () => {
+          if (currentConversation.length > 0 && currentConversation[currentConversation.length - 1].sender === 'user') {
+            const botResponse: string = await fetchBotResponse(currentConversation[currentConversation.length - 1].text);
+            setCurrentConversation((prev) => [...prev, { sender: "system", text: botResponse }]);
+          }
+        };
+        fetchBotResponseAsync();
+      }, [currentConversation]);
 
     // Select an existing conversation
     const selectConversation = async (newConversationId: string) => {
@@ -108,6 +108,28 @@ const Chatbot = () => {
             });
         }
     };
+    
+    const deleteConversation= async (TempConverId: string)=>{
+        if(conversationId===TempConverId)
+        {
+            setConversationId('');
+            setCurrentConversation([]);
+            return
+        }
+        setLoading(true)
+        await axios.delete(`http://localhost:4000/courses/${id}/chatbot/${TempConverId}`)
+        .then(async (response) => {
+            const res = await axios.get(`http://localhost:4000/courses/${id}/chatbot/`);
+            console.log(res.data)
+            setChatHistory(res.data);
+            setLoading(false);
+        })
+        .catch((error) => {
+            console.error(error);
+            setLoading(false);
+        });
+    }
+
 
     const handleNewConversation= async ()=>{
         // if conversation exists then update it with put
@@ -162,11 +184,31 @@ const Chatbot = () => {
 
     // Simulate bot response for demo purposes
     const fetchBotResponse = async (message: string): Promise<string> => {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve(`Bot response to: "${conversationId}"`);
-            }, 1000);
-        });
+        console.log(message);
+
+        if(currentConversation.length==0)
+            return "currentConversation is empty.";
+
+        console.log('Conversation is: ',currentConversation);
+    
+        try {
+            console.log("Fetching bot response...");
+            
+            // Perform the async API call
+            const response = await axios.post('http://localhost:8000/chatbot/response', { 
+                conversation: currentConversation
+            });
+            
+            console.log(response.data); // Log the response data from the bot
+    
+            // Return the actual bot response (from your API)
+            return response.data || "No response from bot";
+        } catch (error) {
+            console.error("Error fetching bot response:", error);
+    
+            // Fallback message if the bot fails to respond
+            return "Bot is currently unavailable.";
+        }
     };
 
     // Loading indicator
@@ -225,6 +267,9 @@ const Chatbot = () => {
                                 className="conversation-list"
                             >
                                 {conversation.id}
+                            </Button>
+                            <Button onClick={() => deleteConversation(conversation.id)}>
+                            X
                             </Button>
                         </div>
                     ))}

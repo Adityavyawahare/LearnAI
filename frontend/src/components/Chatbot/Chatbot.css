@@ -30,13 +30,14 @@
   }
   
   .message {
+    margin: 10px 0;
     padding: 10px 20px;
     border-radius: 10px;
     max-width: fit-content;
   }
   
   .message.user {
-    margin: 0 5px;
+    margin: 10px 5px;
     /* padding: 0 10px; */
     background-color: #007bff;
     color: white;
@@ -44,7 +45,7 @@
   }
   
   .message.system {
-    margin: 5px 0;
+    margin:  10px 5px;
     background-color: #e5e5e5;
     align-self: flex-start;
   }
@@ -84,7 +85,8 @@
   }
 
   .conversation-list{
-    width: 100%;
+    width: 90%;
+    margin: 0px 2px;
     background-color:  #206A83;
     color: #ffffff;
   }
